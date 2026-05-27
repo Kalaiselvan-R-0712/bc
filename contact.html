@@ -1876,6 +1876,37 @@ grid-template-columns:1fr;
 }
 }
 
+/* FOOTER LINKS HOVER EFFECT */
+
+.arch-footer-col ul li a{
+color:#777;
+text-decoration:none;
+position:relative;
+transition:all .3s ease;
+display:inline-block;
+}
+
+.arch-footer-col ul li a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-3px;
+width:0;
+height:2px;
+background:#ff7a00;
+transition:width .3s ease;
+border-radius:10px;
+}
+
+.arch-footer-col ul li a:hover{
+color:#ff7a00;
+transform:translateX(6px);
+}
+
+.arch-footer-col ul li a:hover::after{
+width:100%;
+}
+
 </style>
 </head>
 
@@ -2153,7 +2184,11 @@ required
 
 <script>
 
-const dropdown=document.querySelector(".dropdown")
+// DROPDOWN
+
+const dropdown = document.querySelector(".dropdown")
+
+if(dropdown){
 
 dropdown.addEventListener("click",(e)=>{
 e.stopPropagation()
@@ -2164,59 +2199,147 @@ document.addEventListener("click",()=>{
 dropdown.classList.remove("active")
 })
 
-/* PRELOADER – HALF TIME (625ms) */
+}
+
+// PRELOADER
 
 window.addEventListener("load",()=>{
+
 setTimeout(()=>{
 document.body.classList.add("loaded")
 },625)
+
 })
 
-const burger=document.querySelector(".hamburger")
-const nav=document.querySelector(".nav-menu")
+// MOBILE MENU
+
+const burger = document.querySelector(".hamburger")
+const nav = document.querySelector(".nav-menu")
+
+if(burger && nav){
 
 burger.addEventListener("click",()=>{
 nav.classList.toggle("active")
 })
 
-// APPLY NOW BUTTON REDIRECT
+}
+
+// APPLY BUTTONS
+
 document.querySelectorAll(".apply-btn").forEach(btn=>{
+
 btn.addEventListener("click",()=>{
-window.location.href="404.html"
-})
+window.location.href = "404.html"
 })
 
-/* NEWSLETTER SUBSCRIBE */
+})
 
-const newsletter=document.getElementById("newsletterForm")
+// NEWSLETTER VALIDATION
+
+const newsletter = document.getElementById("newsletterForm")
+
+if(newsletter){
 
 newsletter.addEventListener("submit",(e)=>{
 
 e.preventDefault()
 
-const email=document.getElementById("newsletterEmail").value.trim()
+const email =
+document.getElementById("newsletterEmail").value.trim()
 
-const emailPattern=/^[^ ]+@[^ ]+\.[a-z]{2,3}$/
+const emailPattern =
+/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/
 
 if(!emailPattern.test(email)){
 alert("Please enter a valid email")
 return
 }
 
-window.location.href="404.html"
+window.location.href = "404.html"
 
 })
 
-// CONTACT FORM
+}
 
-document.getElementById("contactForm").addEventListener("submit",(e)=>{
+// CONTACT FORM VALIDATION
+
+const contactForm =
+document.getElementById("contactForm")
+
+if(contactForm){
+
+contactForm.addEventListener("submit",(e)=>{
+
 e.preventDefault()
 
-// OPTIONAL VALIDATION (already handled by required fields)
+const nameInput =
+contactForm.querySelector('input[placeholder="Your Name"]')
+
+const emailInput =
+contactForm.querySelector('input[placeholder="Your Email"]')
+
+const subjectInput =
+contactForm.querySelector('input[placeholder="Subject"]')
+
+const messageInput =
+contactForm.querySelector("textarea")
+
+const name = nameInput.value.trim()
+const email = emailInput.value.trim()
+const subject = subjectInput.value.trim()
+const message = messageInput.value.trim()
+
+// PATTERNS
+
+const namePattern =
+/^[A-Za-z\s]{3,30}$/
+
+const emailPattern =
+/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/
+
+const subjectPattern =
+/^[A-Za-z0-9\s.,!?'-]{3,50}$/
+
+// NAME
+
+if(!namePattern.test(name)){
+alert("Name should contain only letters and spaces")
+nameInput.focus()
+return
+}
+
+// EMAIL
+
+if(!emailPattern.test(email)){
+alert("Please enter a valid email")
+emailInput.focus()
+return
+}
+
+// SUBJECT
+
+if(!subjectPattern.test(subject)){
+alert("Please enter a valid subject")
+subjectInput.focus()
+return
+}
+
+// MESSAGE
+
+if(message.length < 10){
+alert("Message should be at least 10 characters")
+messageInput.focus()
+return
+}
+
+// SUCCESS
 
 window.location.href = "404.html"
 
 })
+
+}
+
 </script>
 
 </body>

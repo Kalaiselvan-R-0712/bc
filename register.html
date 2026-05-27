@@ -399,7 +399,10 @@ togglePass1.onclick=()=>pass.type=pass.type==="password"?"text":"password";
 togglePass2.onclick=()=>confirm.type=confirm.type==="password"?"text":"password";
 
 /* VALIDATION */
+const name=document.getElementById("name");
 const email=document.getElementById("email");
+
+const namePattern=/^[A-Za-z ]+$/;
 
 const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passPattern=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
@@ -410,11 +413,19 @@ e.preventDefault();
 
 let valid=true;
 
+/* NAME VALIDATION */
+if(!namePattern.test(name.value.trim())){
+alert("Full Name should contain only alphabets");
+valid=false;
+}
+
+/* EMAIL VALIDATION */
 if(!emailPattern.test(email.value)){
 emailError.style.display="block";
 valid=false;
 }else emailError.style.display="none";
 
+/* PASSWORD VALIDATION */
 if(!passPattern.test(pass.value)){
 passError.style.display="block";
 valid=false;

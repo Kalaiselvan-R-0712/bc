@@ -1620,6 +1620,37 @@ background:none !important;
     justify-content:center;
 }
 
+/* FOOTER LINKS HOVER EFFECT */
+
+.arch-footer-col ul li a{
+color:#777;
+text-decoration:none;
+position:relative;
+transition:all .3s ease;
+display:inline-block;
+}
+
+.arch-footer-col ul li a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-3px;
+width:0;
+height:2px;
+background:#ff7a00;
+transition:width .3s ease;
+border-radius:10px;
+}
+
+.arch-footer-col ul li a:hover{
+color:#ff7a00;
+transform:translateX(6px);
+}
+
+.arch-footer-col ul li a:hover::after{
+width:100%;
+}
+
 </style>
 </head>
 
